@@ -16,9 +16,3 @@ kibana3:
     - "8080:80"
   links:
     - elasticsearch
-kibana4:
-  image: deviantony/elk-kibana:kibana4
-  ports:
-    - "5601:5601"
-  links:
-    - elasticsearch
