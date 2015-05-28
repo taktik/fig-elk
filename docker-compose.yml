@@ -1,0 +1,27 @@
+elasticsearch:
+  restart: always
+  image: docker.taktik.be/elasticsearch
+  volumes:
+      - elasticsearch:/etc/elasticsearch
+      - /mnt/nas/defiris/ecstreaming/stats/elasticsearch/defiris-1:/var/lib/elasticsearch
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+  environment:
+    ES_HEAP_SIZE: "8g"
+logstash:
+  restart: always
+  image: docker.taktik.be/logstash
+  volumes:
+    - logstash:/etc/logstash/conf.d
+  ports:
+    - "5000:5000"
+  links:
+    - elasticsearch
+kibana4:
+  restart: always
+  image: docker.taktik.be/kibana
+  ports:
+    - "5601:5601"
+  links:
+    - elasticsearch
